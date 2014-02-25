@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %} Make Order {% endblock %}
+
+{% block script %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename = 'scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'calendar.js' ) }}"></script>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'calendar.css') }}"/>
+{% endblock %}
+
+{% block header %}
+    {% with %}
+        {% set active_page = 'order' %}
+        {% set menu = menu %}
+        {% include 'header.html' %}
+    {% endwith %}
+{% endblock %}
+
+{% block body %}
+
+    <form method="POST" action="{{ url_for('order') }}" class="form" enctype="multipart/form-data">
+        <fieldset>
+            <legend>ORDER INFORMATION</legend>
+
+            {% for field in form %}
+                {% if field.name != 'csrf_token' %}
+                    <div>
+                        {{ field.label(class='fheader') }}
+
+                        {% if field.name == 'subject' %}
+                            {{ field(class='field', onchange='javascript:gc()') }}
+                        {% else %}
+                            {{ field(class='field') }}
+                        {% endif %}
+
+                        {% if field.errors %}
+                            <div class="app_error">{{ field.errors|first }}</div>
+                        {% endif %}
+                    </div>
+                    {%  if not field.errors %}
+                        <br/>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <div>
+                <label class="fheader" for="file[]">Select files:</label>
+                <input type="file" multiple name="file[]" />
+            </div> <br/>
+            <div>
+                <input type="submit" value="" class="btn-submit-order" name="submit" />
+                {{ form.csrf_token }}
+            </div>
+        </fieldset>
+    </form>
+    <script type="text/javascript">
+		$(function(){
+			$('*[name=deadline]').appendDtpicker();
+		});
+	</script>
+{% endblock %}

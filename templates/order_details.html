@@ -1,0 +1,45 @@
+<div id="order-details">
+    <fieldset>
+        <legend>ORDER #{{ order.id[1] }}</legend>
+        <table>
+            <tr>
+                <td><b>{{ order.title[0] }}</b> {{ order.title[1] }}</td>
+                <td><b>{{ order.deadline[0] }}</b> {{ order.deadline[1] }}</td>
+                <td><b>{{ order.explanations[0] }}</b> {% if order.explanations[1] %} yes {% else %} No {% endif %}</td>
+            </tr>
+            <tr>
+                <td><b>{{ order.subject[0] }}</b> {{ order.subject[1] }}</td>
+                <td><b>{{ order.category[0] }}</b> {{ order.category[1] }}</td>
+                <td><b>{{ order.os[0] }}</b> {{ order.os[1] }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <b>Attached files:</b><br/>
+                    {% if files %}
+                        {% for f in files %}
+                            <a href="{{ url_for('download', file_uuid=f.local_name) }}">{{ f.name }}</a><br/>
+                        {% endfor %}
+                    {% else %}
+                        No files
+                    {% endif %}
+                </td>
+                <td>
+                    <b>{{ order.price[0] }}</b>  ${{ order.price[1] }}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" id="order-task"><b>{{ order.details[0] }}</b> <pre>{{ order.details[1] }}</pre></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td class="order-buttons">
+                    <a href="javascript:void(0);" class="btn-delete-order" onclick="delete_order({{ order.id[1] }})"></a>
+                    <a href="javascript:void(0);" class="btn-hide-order" onclick="hide_order_details({{ order.id[1] }})"></a>
+                    <a href="javascript:void(0);" class="btn-comment-order" onclick="show_feedback_form({{ order.id[1] }})"></a>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <div id="ff"></div>
+</div>

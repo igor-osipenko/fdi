@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+
+
+{% block script %}
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+{% endblock %}
+
+
+{% block onload %}
+    set_handlers()
+{% endblock %}
+
+{% block header %}
+    {% with %}
+        {% set active_page = 'reviews' %}
+        {% set menu = menu %}
+        {% include 'header.html' %}
+    {% endwith %}
+{% endblock %}
+
+{% block body %}
+
+    {% if session.username %}
+        {% include 'review_form.html' %}
+    {% else %}
+        Please, sign in to leave a review
+    {% endif %}
+{% endblock %}

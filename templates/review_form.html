@@ -1,0 +1,98 @@
+<form action="#" method="post" onsubmit="return false;" id="feedback-form">
+    <fieldset>
+        <legend>YOUR FEEDBACK</legend>
+        <table>
+            <tr>
+                <td id="comment-field">
+                    <label for="comment">Your comment:</label>
+                    <textarea name="comment" id="comment"></textarea>
+                </td>
+                <td id="stars">
+                    <table>
+                        <tr>
+                            <td>
+                                Requirements:
+                                <div>
+                                    <ul class="rating-w-fonts" id="requirements">
+                                        <li id="rr1">t</li>
+                                        <li id="rr2">t</li>
+                                        <li id="rr3">t</li>
+                                        <li id="rr4">t</li>
+                                        <li id="rr5">t</li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Quality:
+                                <div>
+                                    <ul class="rating-w-fonts" id="quality">
+                                        <li id="qr1">t</li>
+                                        <li id="qr2">t</li>
+                                        <li id="qr3">t</li>
+                                        <li id="qr4">t</li>
+                                        <li id="qr5">t</li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Deadlines:
+                                <div>
+                                    <ul class="rating-w-fonts" id="deadline">
+                                        <li id="dr1">t</li>
+                                        <li id="dr2">t</li>
+                                        <li id="dr3">t</li>
+                                        <li id="dr4">t</li>
+                                        <li id="dr5">t</li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Communication:
+                                <div>
+                                    <ul class="rating-w-fonts" id="communication">
+                                        <li id="cr1">t</li>
+                                        <li id="cr2">t</li>
+                                        <li id="cr3">t</li>
+                                        <li id="cr4">t</li>
+                                        <li id="cr5">t</li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Cooperation:
+                                <div>
+                                    <ul class="rating-w-fonts" id="kooperation">
+                                        <li id="kr1">t</li>
+                                        <li id="kr2">t</li>
+                                        <li id="kr3">t</li>
+                                        <li id="kr4">t</li>
+                                        <li id="kr5">t</li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" name="submit" value="Add comment" class="btn-submit"/>
+                    <input type="hidden" value="1" name="requirements" id="m_requirements"/>
+                    <input type="hidden" value="1" name="deadline" id="m_deadline"/>
+                    <input type="hidden" value="1" name="quality" id="m_quality"/>
+                    <input type="hidden" value="1" name="communication" id="m_communication"/>
+                    <input type="hidden" value="1" name="kooperation" id="m_kooperation"/>
+                    <input type="hidden" value="{{ order_id }}" name="order_id"/>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>

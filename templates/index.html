@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+
+
+{% block header %}
+    {% with %}
+        {% set active_page = '/' %}
+        {% set menu = menu %}
+        {% include 'header.html' %}
+    {% endwith %}
+{% endblock %}
+
+{% block body %}
+    Main page
+{% endblock %}

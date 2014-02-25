@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %} Admin Login {% endblock %}
+
+{% block header %}
+    {% with %}
+        {% set menu = menu %}
+        {% include 'header.html' %}
+    {% endwith %}
+{% endblock %}
+
+{% block body %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('very_secret_admin_login_form') }}" class="form">
+        <fieldset>
+            <legend>Login form</legend>
+            {% for field in form %}
+                {% if field.name != 'csrf_token' %}
+                    <div>
+                        {{ field.label(class='fheader') }} {{ field(class='field') }}
+                        {% if field.errors %}
+                            <div class="app_error">{{ field.errors|first }}</div>
+                        {% endif %}
+                    </div>
+                    {%  if not field.errors %}
+                        <br/>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <div>
+                <input type="submit" value="" name="submit" class="btn-login"/>
+                {{ form.csrf_token }}
+            </div>
+        </fieldset>
+    </form>
+
+{% endblock %}

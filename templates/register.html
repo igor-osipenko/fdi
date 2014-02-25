@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %} Registration {% endblock %}
+
+{% block header %}
+    {% with %}
+        {% set active_page = 'register' %}
+        {% set menu = menu %}
+        {% include 'header.html' %}
+    {% endwith %}
+{% endblock %}
+
+{% block onload %}gettz();{% endblock  %}
+
+{% block  script %}
+    <script type="text/javascript">
+        function gettz(){
+            var offset = new Date().getTimezoneOffset();
+            document.getElementById("timezone").value = -(offset / 60.0);
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('register') }}" class="form">
+        <fieldset>
+            <legend>PERSONAL INFORMATION</legend>
+
+            {% for field in form %}
+                {% if field.name != 'csrf_token' %}
+                    <div>
+                        {{ field.label(class='fheader') }} {{ field(class='field') }}
+                        {% if field.errors %}
+                            <div class="app_error">{{ field.errors|first }}</div>
+                        {% endif %}
+                    </div>
+                    {%  if not field.errors %}
+                        <br/>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            <div>
+                <input type="submit" value="" class="btn-register" name="submit" />
+                {{ form.csrf_token }}
+                <input type="hidden" name="timezone" value="" id="timezone" />
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

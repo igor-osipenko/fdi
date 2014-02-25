@@ -1,0 +1,42 @@
+{% set user_menu = [
+        ('My profile', 'profile'),
+        ('Make order', 'order'),
+        ('Logout', 'logout')
+    ]
+-%}
+
+{% set usual_menu = [
+        ('Registration', 'register'),
+        ('Login', 'login')
+    ]
+-%}
+
+
+{% macro show_menu(menu) %}
+    {% for name, link in menu %}
+        <a href="{{ link }}" {% if active_page == link %} class="active" {% endif %}>
+            <span>{{ name }}</span>
+        </a>
+    {% endfor %}
+{% endmacro %}
+
+<header>
+    <section>
+        <div id="logo">
+            <img alt="Divitiae Inc" src="{{ url_for('static', filename='logo.png') }}" />
+        </div>
+        <nav>
+            <div class="menu-item">
+
+                {{ show_menu(menu) }}
+
+                {% if session.username %}
+                    {{ show_menu(user_menu) }}
+                {% else %}
+                    {{ show_menu(usual_menu) }}
+                {% endif %}
+
+            </div>
+        </nav>
+    </section>
+</header>
